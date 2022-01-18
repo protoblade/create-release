@@ -8801,7 +8801,8 @@ async function run() {
     const draft = core.getInput('draft', { required: false }) === 'true';
     const prerelease = core.getInput('prerelease', { required: false }) === 'true';
     const commitish = core.getInput('commitish', { required: false }) || context.sha;
-
+    const generateReleaseNotes = core.getInput('generate_release_notes', { required: false }) === 'false';
+    
     const bodyPath = core.getInput('body_path', { required: false });
     const owner = core.getInput('owner', { required: false }) || currentOwner;
     const repo = core.getInput('repo', { required: false }) || currentRepo;
@@ -8825,6 +8826,7 @@ async function run() {
       body: bodyFileContent || body,
       draft,
       prerelease,
+      generateReleaseNotes,
       target_commitish: commitish
     });
 
